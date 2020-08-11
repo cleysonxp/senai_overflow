@@ -1,6 +1,7 @@
 const express = require('express');
-const rotas = require("./routes");
 require("./database");
+const rotas = require("./routes");
+
 
 //iniciando a aplicação
 const app = express()

@@ -2,6 +2,7 @@ const { Op } = require("sequelize");
 const Aluno = require("../models/Aluno");
 
 module.exports = {
+    
     //lista todo os alunos
     async listar(req, res){
         const alunos = await Aluno.findAll();
