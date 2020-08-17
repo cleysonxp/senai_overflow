@@ -2,9 +2,7 @@ const { Op } = require("sequelize");
 const Aluno = require("../models/Aluno");
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
-// const authConfig = require('../config/auth.json');
-// const authConfig = require("../config/");
-
+const authConfig = require('../config/auth.json');
 
 module.exports = {
     
@@ -41,8 +39,12 @@ module.exports = {
         //Verificar se aluno existe no banco
         //select * from 
         let aluno = await Aluno.findOne({
-            where: { [Op.or]: [ {ra: ra},{email: email}],
-            },
+            where: { 
+                [Op.or]: [
+                    {ra: ra},
+                    {email: email}
+                ]
+            }
         });
         
         if(aluno){
@@ -54,18 +56,16 @@ module.exports = {
 
         aluno = await Aluno.create({ra, nome, email, senha: senhaCripto});    
 
-        const token = jwt.sing({ alunoId: aluno.id}, );
+        const token = jwt.sign({ alunoId: aluno.id},  authConfig.secret);
     
-        res.status(201).send(
-            {
-                aluno: {
-                    alunoId: aluno.id,
-                    nome: aluno.nome,
-                    ra: aluno.ra,
-                },
-                // token
-            }
-        );
+        res.status(201).send({
+            aluno : {
+                alunoId: aluno.id,
+                nome: aluno.nome,
+                ra: aluno.ra,
+            },
+            token
+        });
     },
     update(){},
     delete(){},

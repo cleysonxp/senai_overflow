@@ -1,8 +1,7 @@
 const Aluno = require('../models/Aluno');
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
-// const authConfig = require("../config/auth.json");
-// const authConfig = require('../config/')
+const authConfig = require("../config/auth.json");
 
 module.exports = {
 
@@ -22,16 +21,16 @@ module.exports = {
             return res.status(403).send({erro: "Úsuario e/ou senha inválidos"});
         }
 
-        // const token = jwt.sign({alunoId: aluno.id}, authConfig.secret);
+        const token = jwt.sign({alunoId: aluno.id}, authConfig.secret);
 
         // se exitir e a senha estiver correta retorna ok com token
         res.status(201).send({
             aluno: {
                 alunoId: aluno.id,
                 nome: aluno.nome,
-                ra: aluno.ra,
+                ra: aluno.ra
             },
-            // token
+            token
         });
     },
 };
