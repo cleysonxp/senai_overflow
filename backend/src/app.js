@@ -1,20 +1,19 @@
 const express = require('express');
-const cors = require("cors")
-require("./database");
-const rotas = require("./routes");
+const rotas = require('./routes');
+const cors = require("cors");
+require('./database');
 
+// Iniciando a aplicação
+const app = express();
 
-//iniciando a aplicação
-const app = express()
+// Habilitar o cors para qualquer origem
+app.use(cors());
 
-//habilitando o cors para qualquer origem
-app.use(cors())
-
-//nas requisições pode ter corpo
+// Nas requisições podem ter dados tipo Json
 app.use(express.json());
 
-//cadastrando as rotas
+// Cadastrando as rotas
 app.use(rotas);
-    
 
-module.exports = app;
+// Exportar a aplicação configurada
+module.exports = app;   

@@ -2,50 +2,50 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable("postagens",{
+    return queryInterface.createTable( "postagens", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
-      titulo: {
+      titulo : {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
-      descricao: {
+      descricao : {
         type: Sequelize.TEXT,
-        allowNull: false,
+        allowNull: false
       },
-      imagem: {
-        type: Sequelize.STRING,
-        allowNull: true,
+      imagem : {
+        type: Sequelize.STRING, // firebase.com/minhaImagem.png
+        allowNull: true
       },
-      gists: {
+      gists : {
         type: Sequelize.TEXT,
-        allowNull: true,
+        allowNull: true
       },
-      created_aluno_id: {
+      created_aluno_id : {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: "alunos",
-          key: "id",
+          key: "id"
         },
         onUpdate: "CASCADE",
-        onDelete: "CASCADE",
+        onDelete: "CASCADE"
       },
       created_at: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: false
       },
-      updated_at:{
-        type: Sequelize.STRING,
-        allowNull: false,
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false
       }
-    });
+    } );
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("postagens");
+    return queryInterface.dropTable( "postagens" );
   }
 };

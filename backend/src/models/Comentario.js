@@ -1,15 +1,15 @@
-const  {Model, DataTypes} = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 
 class Comentario extends Model {
     static init(sequelize){
         super.init(
             {
-                descricao: DataTypes.TEXT,
+                descricao: DataTypes.TEXT
             },
             {
-                sequelize,
+                sequelize
             }
-        );        
+        );
     }
 
     static associate(models){

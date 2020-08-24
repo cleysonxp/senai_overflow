@@ -2,48 +2,48 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable("comentarios",{
+    return queryInterface.createTable( "comentarios", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
-      descricao: {
+      descricao : {
         type: Sequelize.TEXT,
-        allowNull: false,
+        allowNull: false
       },
-      aluno_id: {
+      aluno_id : {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: "alunos",
-          key: "id",
+          key: "id"
         },
         onUpdate: "CASCADE",
-        onDelete: "CASCADE",
+        onDelete: "CASCADE"
       },
-      postagem_id:{
+      postagem_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: "postagens",
-          key: "id",
+          key: "id"
         },
         onUpdate: "CASCADE",
-        onDelete: "CASCADE",
+        onDelete: "CASCADE"
       },
       created_at: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: false
       },
-      updated_at:{
-        type: Sequelize.STRING,
-        allowNull: false,
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false
       }
-    });
+    } );
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("comentarios");
+    return queryInterface.dropTable( "comentarios" );
   }
 };
