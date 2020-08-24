@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import Login from "./pages/Login";
-import { GlobalStyle } from "./styles/GlobalStyles";
+import Routes from './routes'
+import  { GlobalStyle } from "./styles/GlobalStyles";
 
 function App() {
-  return(
+  return (
     <>
-      <Login/>
-      <GlobalStyle/>
+      <Routes />
+      <GlobalStyle />
     </>
   );
 }

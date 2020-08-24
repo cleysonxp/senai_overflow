@@ -1,29 +1,27 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-
-    :root{
+    :root {
         --primary: #111;
-        --secondary: rgb(25,25,25);
-        --white: #d9d9d9
-        --gray: #7a7a7a
-        --red: #aa0000
+        --secundary: rgb(25, 25, 25);
+        --white: #d9d9d9;
+        --gray: #7a7a7a;
+        --red: #aa0000;
     }
 
-    *{
+    * {
         margin: 0;
         padding: 0;
-        outline: 0;
     }
 
-    body{
+    body {
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         background-color: var(--primary);
     }
 
-    input{
+    input {
         color: var(--white);
-        background-color: var(--secondary);
+        background-color: var(--secundary);
         font-size: 16px;
         border: 1px solid var(--white);
         padding: 10px;
@@ -33,35 +31,37 @@ export const GlobalStyle = createGlobalStyle`
         transition: background-color 0.2s;
     }
 
-    label{
+    label {
         color: var(--white);
-        letter-spacing:2px;
+        letter-spacing: 2px;
 
         font-size: 20px;
     }
 
-    input, button{
-        :hover{
-            background-color: var(--red)
+    input, button {
+        :hover {
+            background-color: var(--red);
         }
     }
 
-    button{
+    button {
         padding: 10px;
 
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         font-size: 18px;
         letter-spacing: 1px;
 
-        color:var(--white);
+        color: var(--white);
         background-color: var(--primary);
-        border: 1px solid var(--gray);
+        border: 1px solid var(--white);
+
+        cursor: pointer;
 
         transition: background-color 0.2s;
 
-        :active{
+        :active {
             color: var(--gray);
-            border: 1px solid var(--gray);
+            border: 1px solid var(--white);
         }
     }
-`;
+`

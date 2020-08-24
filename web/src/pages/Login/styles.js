@@ -1,9 +1,14 @@
+// import styled, { keyframes } from "styled-components";
+/* *{
+    animation: ${fadeform} 1s;
+} */
+
 import styled from "styled-components";
 
 export const Container = styled.div`
     width: 100vw;
     max-width: 1220px;
-    height:100vh;
+    height: 100vh;
     margin: 0 auto;
 
     display: flex;
@@ -15,15 +20,16 @@ export const ImageCropped = styled.div`
     width: 100%;
     max-width: 580px;
     min-width: 100px;
-    height: 80%;
+    height: 90%;
+    min-height: 500px;
     max-height: 700px;
+
     overflow: hidden;
 
     border: 1px solid var(--white);
     border-right: 0px;
 
-
-    >img{
+    > img {
         width: 800px;
         margin-left: -110px;
     }
@@ -32,8 +38,8 @@ export const ImageCropped = styled.div`
 export const Form = styled.form`
     width: 100%;
     max-width: 400px;
-    height: 80%;
-    /* max-height: 80%; */
+    height: 90%;
+    min-height: 500px;
 
     border: 1px solid var(--white);
     border-radius: 0px 10px 10px 0px;
@@ -50,54 +56,54 @@ export const Titulo = styled.h1`
     font-size: 40px;
     letter-spacing: 5px;
 
-    text-shadow: 0px 0px 3px var(--white), 0pc 0px 5px var(--white);
+    text-shadow: 0px 0px 3px var(--white), 0px 0px 5px var(--white);
 
     cursor: default;
     transition: 0.8s;
 
-    :hover{
+    :hover {
         color: var(--primary);
     }
 `;
 
-export const SubTitulo = styled(Titulo)`
+export const Subtitulo = styled(Titulo)`
     margin-bottom: 20px;
-
     font-size: 20px;
     color: var(--white);
     text-shadow: none;
 
-    :hover{
+    :hover {
         color: var(--red);
     }
 `;
 
 export const InputGroup = styled.div`
     width: 100%;
-    margin-top: 10px;
+    margin-bottom: 10px;
 
     display: flex;
     align-items: center;
 
-    >label{
-        margin:0px 10px;
+    > label {
+        margin: 0px 10px;
         min-width: 65px;
     }
 
-    >input{
+    > input {
         flex: 1;
-        margin-right: 10px;
+        margin: 0px 10px;
     }
 
     @media (max-width: 700px){
         flex-direction: column;
-        justify-content: flex-start
-        > input{
-            width:100%;
-            margin: 0px 10px;
+        justify-content: flex-start;
+
+        > input {
+            width: 100%;
+            margin: 0px;
         }
     }
-`
+`;
 
 export const Button = styled.button`
     min-width: 200px;
