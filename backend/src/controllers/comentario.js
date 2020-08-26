@@ -57,7 +57,7 @@ module.exports = {
                 as: "aluno",
                 attributes: ["id", "nome"]
             },
-            attributes: ["id", "descricao"],
+            attributes: ["id", "descricao", "created_at"],
             order: [["created_at", "DESC"]]
         });
 
