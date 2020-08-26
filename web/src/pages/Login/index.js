@@ -7,7 +7,7 @@ import { api } from "../../services/api";
 import { signIn } from "../../services/security";
 import { useHistory } from "react-router-dom";
 
-// import Alerts from "../../components/alerts";
+import Alerts from "../../components/alerts";
 
 const FormLogin = (props) => {
     const history = useHistory();
@@ -43,7 +43,7 @@ const FormLogin = (props) => {
     }
 
     return (
-        <Form onSubmit={entrar}>
+        <Form onSubmit={entrar}>            
             <Titulo> Senai Overflow </Titulo>
             <Subtitulo> Compartilhe suas dúvidas </Subtitulo>
 
@@ -176,8 +176,8 @@ const FormRegistrar = (props) => {
 
 const Login = () => {
     const [mostrarForm, setMostrarForm] = useState("login");
-
-    return (
+    // const [mensagem, setMensagem] = useState();
+    return ( 
         <Container>
             <ImageCropped>
                 <img src={foto} alt="Imagem de capa" />
