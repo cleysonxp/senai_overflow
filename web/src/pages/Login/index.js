@@ -7,7 +7,7 @@ import { api } from "../../services/api";
 import { signIn } from "../../services/security";
 import { useHistory } from "react-router-dom";
 
-import Alerts from "../../components/alerts";
+// import Alerts from "../../components/alerts";
 
 const FormLogin = (props) => {
     const history = useHistory();
@@ -81,6 +81,8 @@ const FormLogin = (props) => {
 }
 
 const FormRegistrar = (props) => {
+    const history = useHistory();
+
     const [ alunoRegistrar, setAlunoRegistrar ] = useState({
         ra : "",
         nome: "",
@@ -89,6 +91,7 @@ const FormRegistrar = (props) => {
     });
 
     const registrar = async ( e ) => {
+        
         e.preventDefault();
 
         try {
@@ -96,9 +99,10 @@ const FormRegistrar = (props) => {
 
             if(retorno.status === 201){
                 // Vai logar na aplicação
-                // Redirecionar para a tela home
+                signIn( retorno.data );
 
-                window.alert("Registrado com sucesso!");
+                // Redirecionar para a tela home
+                return history.push("/home");
             }
         } catch (erro) {
             if(erro.response){

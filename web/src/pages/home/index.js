@@ -13,6 +13,8 @@ const CardPost = ({post}) =>{
      
     const [mostrarComentarios, setMostrarComentarios ] = useState(false);
     const [comentarios, setComentarios] = useState([]);
+    const [novoComentario, setNovoComentario] = useState("");
+
 
     const carregarComentarios = async () =>{
         try {
@@ -24,11 +26,34 @@ const CardPost = ({post}) =>{
             setMostrarComentarios(!mostrarComentarios);
         } catch (error) {
             console.log(error);
+        }  
+    }
+
+    const criarComentario = async (e) => {
+        e.preventDefault();
+        
+        try {
+            //chamada para a api, criando um novo comentario
+            const retorno = await api.post(`/postagens/${post.id}/comentarios`, {
+                descricao: novoComentario
+            });
+
+            //Recebe o retorno da api com o comentario criado 
+            let comentario = retorno.data;
+
+            //Coloca os dados do aluno logado nos comentarios criado
+            comentario.Aluno = getAluno();
+
+            //Atualiza a lista inserindo o novo comentario 
+            //seta a lista com o que ela já tinha, e com o novo comentario
+            setComentarios([...comentarios, comentario]); 
+
+            //Limpa o campo novo comentario
+            setNovoComentario("");
+
+        } catch (error) {
+            
         }
-        
-
-
-        
     }
 
     return(
@@ -41,7 +66,7 @@ const CardPost = ({post}) =>{
                         {post.gists && (<FiGithub className="icon" size={20}/>)}
                     </header>
 
-                    <body>
+                    <section>
                         <strong>
                             {post.titulo}
                         </strong>
@@ -51,7 +76,7 @@ const CardPost = ({post}) =>{
                         </p>
 
                         <img src={imgPost} alt="Imagem do post"/>
-                    </body>
+                    </section>
 
                     <footer>
                         <h1 onClick={carregarComentarios}>Comentários</h1>
@@ -59,7 +84,7 @@ const CardPost = ({post}) =>{
                             <>
                                 {comentarios.length === 0 && (<p>Seja o primeiro a comentar!</p>)}
                                 {comentarios.map((coment)=>(
-                                    <section>
+                                    <section key={coment.id}>
                                         <header>
                                             <img src={fotoPerfil} alt="Foto de perfil"/>
 
@@ -70,7 +95,17 @@ const CardPost = ({post}) =>{
                                         <p>{coment.descricao}</p>
                                     </section>  
                                 ))}
-                                                              
+                                <form className="novo-comentario" onSubmit={criarComentario}>
+                                    <textarea 
+                                        value={novoComentario}
+                                        onChange={(e) =>{
+                                            setNovoComentario(e.target.value);
+                                        }}
+                                        placeholder="Comente essa dúvida" 
+                                        required
+                                        ></textarea>
+                                    <button>Enviar</button>
+                                </form>                         
                             </>
                         )}                        
                     </footer>
@@ -122,7 +157,7 @@ function Home() {
             <section className="profile">
                 <img src={fotoPerfil} alt="Foto de perfil"/>
 
-                <a href="#">Editar foto</a>
+                <label>Editar foto</label>
 
                 <strong>Nome:</strong>
                 <p>{alunoSessao.nome}</p>
@@ -133,7 +168,7 @@ function Home() {
 
             <section className="feed">
                 {postagens.map( (post) =>(
-                    <CardPost post={post}/>
+                    <CardPost key={post.id} post={post}/>
                 ))}
                 
             </section>
