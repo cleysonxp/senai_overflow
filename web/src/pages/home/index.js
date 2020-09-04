@@ -8,6 +8,9 @@ import './styles.css';
 import { signOut, getAluno } from '../../services/security';
 import { useHistory } from 'react-router-dom';
 import { api } from "../../services/api";
+import Popup from '../../components/Popup';
+
+
 
 const CardPost = ({post}) =>{
      
@@ -111,12 +114,58 @@ const CardPost = ({post}) =>{
                     </footer>
                 </div>
     )
+};
+
+
+
+const NovaPostagem = ({setMostrarNovaPostagem}) =>{
+    const [novaPostagem, setNovaPostagem] = useState({
+        titulo: "",
+        descricao: "",
+        gists: "",
+    })
+
+
+
+    const fechar = () =>{
+        const {titulo, descricao, gists} = novaPostagem;
+
+        if((titulo || descricao || gists) && !window.confirm("Tem certeza que quer badonar a dúvida?")){
+            return
+        }
+
+        setMostrarNovaPostagem(false);
+    }
+
+    const handlerInput = (e) =>{
+        setNovaPostagem({...novaPostagem, [e.target.id]: e.target.value});
+    }
+
+
+    return (<Popup>
+        <form className="nova-postagem">
+            <span onClick={fechar}>&times;</span>
+            <h1>Publique sua dúvida</h1>
+            <label>Titulo</label>
+            <input id="titulo" type="text" placeholder="Sobre o que é sua dúvida" onChange={handlerInput}/>
+            <label>Descrição</label>
+            <textarea id="descricao" placeholder="Descreva em detalhes, o que te aflinge!" onChange={handlerInput}></textarea>
+            <label>Gists<em>(Opcional)</em></label>
+            <input id="gists" type="text" placeholder="https://gits.github.com/......."onChange={handlerInput}/>
+            <label>Imagem<em>(Opcional)</em></label>
+            <input type="file"/>
+            <img alt="preview"/>
+            <button>Enviar</button>
+        </form>
+    </Popup>)
 }
 
 function Home() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const history = useHistory();
     const [postagens, setPostagens] = useState([]);
+    const [mostrarNovaPostagem, setMostrarNovaPostagem] = useState(false);
+
     
     useEffect(() =>{
         const carregarPostagens = async () =>{
@@ -132,8 +181,13 @@ function Home() {
     }, []);
 
     const alunoSessao = getAluno();
+    
+    
+    
   return (
+    
     <div className="container">
+        {mostrarNovaPostagem && <NovaPostagem setMostrarNovaPostagem={setMostrarNovaPostagem}/> }
         <header className="header">
             <div>
                 <p>Senai Overflow</p>
@@ -172,8 +226,15 @@ function Home() {
                 ))}
                 
             </section>
+
+            <section className="actions">
+                <button onClick={() =>{
+                    setMostrarNovaPostagem(true)
+                }}>Nova Postagem</button>
+            </section>
         </div>
     </div>
+    
   );
 }
 
